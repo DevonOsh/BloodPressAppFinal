@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang=en>
+
+<head>
+  <title>Blood Pressure Monitor</title>
+
+  <!--Adjusting the page on mobile screen  -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+  <meta charset="utf-8">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/jquery.mobile-1.3.1.min.css"/>
+  <link rel="stylesheet" href="css/bootstrap.min.css" />
+  <script src="scripts/jquery-1.9.1.min.js"></script>
+  <script src="scripts/chromeFileProtocolFix.js"></script>
+  <script src="scripts/jquery.mobile-1.3.1.min.js"></script>
+</head>
+
+<body>
+
+  <div data-role="page" id="pageHome">
+    <div data-role="header">
+      <h1>Blood Pressure Monitor</h1>
+    </div>
+    <div data-role="content">
+      User ID:
+      <input type="text" id="loginUserID"></input>
+      Password :
+      <input type="password" id="passcode"></input>
+
+      <div data-role="controlgroup" id="numKeyPad">
+        <a data-role="button" id="btnEnter" type="submit">Enter</a>
+        <a href="#pageUserInfo" data-role="button" id="btnCreateUser">Create New User</a>
+        <a href="#pageAbout" data-role="button">About</a>
+      </div>
+      <div data-role="controlgroup" data-type="horizontal">
+        <a data-role="button" onclick="addValueToPassword(7)">7</a>
+        <a data-role="button" onclick="addValueToPassword(8)">8</a>
+        <a data-role="button" onclick="addValueToPassword(9)">9</a>
+      </div>
+      <div data-role="controlgroup" data-type="horizontal">
+        <a data-role="button" onclick="addValueToPassword(4)">4</a>
+        <a data-role="button" onclick="addValueToPassword(5)">5</a>
+        <a data-role="button" onclick="addValueToPassword(6)">6</a>
+      </div>
+      <div data-role="controlgroup" data-type="horizontal">
+        <a data-role="button" onclick="addValueToPassword(1)">1</a>
+        <a data-role="button" onclick="addValueToPassword(2)">2</a>
+        <a data-role="button" onclick="addValueToPassword(3)">3</a>
+      </div>
+      <div data-role="controlgroup" data-type="horizontal">
+        <a data-role="button" onclick="addValueToPassword(0)">0</a>
+        <a data-role="button" onclick="addValueToPassword('bksp')"
+        data-icon="delete">del</a>
+      </div>
+    </div>
+  </div>
+
+    <!--Disclaimer Page -->
+  <div data-role="page" id="legalNotice" data-close-btn="none">
+    <div data-role="header">
+      <h1>Disclaimer</h1>
+    </div>
+    <div data-role="content">
+      [Insert Disclaimer Text Here]
+      <br>
+      <a href="javascript:void(0)" id="noticeYes" data-role="button"
+      data-icon="forward" data-mini="false">Yes</a>
+    </div>
+  </div>
+
+  <!--User Information Page/Form -->
+  <div data-role="page" id="pageUserInfo">
+    <div data-role="header">
+      <a href="#pageMenu" data-role="button" data-icon="bars" data-iconpos="left" data-inline="true">Menu</a>
+      <h1>User Information</h1>
+    </div>
+    <!-- /header -->
+    <div data-role="content">
+      <form id="userInfoForm" action="">
+          <div data-role="fieldcontain">
+            <label for="email">Email: </label>
+            <input type="email" placeholder="Email" name="email" data-mini="false" id="email" value="Email" required>
+          </div>
+          <div data-role="fieldcontain">
+            <label for="userID">Personal User ID: </label>
+            <input type="text" placeholder="User ID" name="userID" data-mini="false" id="userID" value="User ID" required>
+          </div>
+          <div data-role="fieldcontain">
+            <label for="firstName">First Name: </label>
+            <input type="text" placeholder="First Name" name="firstName" data-mini="false" id="firstName" value="First Name" required>
+          </div>
+          <div data-role="fieldcontain">
+            <label for="lastName">Last Name: </label>
+            <input type="text" placeholder="Last Name" name="lastName" data-mini="false" id="lastName" value="Last Name" required>
+          </div>
+          <div data-role="fieldcontain">
+            <label for="birthdate">Birthdate: </label>
+            <input type="date" placeholder="01/01/2000" name="birthDate" data-mini="false" id="birthdate" value="Birthdate" required>
+          </div>
+          <div data-role="fieldcontain">
+            <label for="password">Edit Password: </label>
+            <input type="password" placeholder="New Password" name="password" data-mini="false" id="password" required>
+          </div>
+          <div data-role="fieldcontain">
+            <label for="insCardNum">Insurance Card Number: </label>
+            <input type="text" placeholder="Insurance Card Number" name="insCardNum" data-mini="false" id="insCardNum" value="" required>
+          </div>
+
+          <input type="submit" id="btnUserUpdate" data-icon="check" data-iconpos="left" value="Update" data-inline="true">
+        </form>
+    </div>
+  </div>
+
+  <div data-role="page" id="pageMenu">
+    <div data-role="header">
+      <a href="#pageMenu" data-role="button" data-icon="bars" data-iconpos="left" data-inline="true">Menu</a>
+      <h1>Blood Pressure Monitor</h1>
+    </div>
+    <div data-role="content">
+      <div data-role="controlgroup">
+        <a href="#pageUserInfo" data-role="button">User Info</a>
+        <a href="#pageNewRecordForm"" data-role="button">Records</a>
+        <a href="#pageGraph" data-role="button">Data Graph</a>
+        <a href="#pageAdvice" data-role="button">Recommendations</a>
+        <a href="#pageSync" data-role="button">Sync</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Records page -->
+  <div data-role="page" id="pageRecords">
+    <div data-role="header">
+      <a href="#pageMenu" data-role="button" data-icon="bars" data-iconpos="left" data-inline="true">Menu</a>
+      <h1>Records</h1>
+    </div>
+    <div data-role="content">
+      <!-- User's Information Section -->
+      <div data-role="fieldcontain" id="divUserSection">
+      </div>
+      <h3 align="center">History</h3>
+      <div data-role="fieldcontain">
+        <!-- Records Table -->
+        <table id="recordsTable" class="ui-responsive table-stroke">
+        </table>
+      </div>
+      <div data-role="fieldcontain">
+        <a href="#pageNewRecordForm" id="addRecordBtn" data-role="button" data-icon="plus">Add New Entry</a>
+        <a href="#" data-role="button" id="clearHistoryBtn" data-icon="delete">Clear History</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- New Record Form page -->
+  <div data-role="page" id="pageNewRecordForm">
+    <div data-role="header">
+          <a href="#pageMenu" data-role="button" data-icon="bars" data-iconpos="left" data-inline="true">Menu</a>
+      <h1>Records</h1>
+    </div>
+    <div data-role="content">
+        <form id="newRecordForm" action="">
+          <div data-role="fieldcontain">
+            <div data-role="fieldcontain">
+              <label for="examDate">Date: </label>
+              <input type="date" name="examDate" data-mini="false" id="examDate" value="">
+            </div>
+            <div data-role="fieldcontain">
+              <label for="upper">Systolic Pressure: 
+              </label>
+              <input step="0.01" placeholder="0" name="upper" data-mini="false" id="upper" value="">
+            </div>
+            <div data-role="fieldcontain">
+              <label for="lower">Diastolic Pressure: 
+              </label>
+              <input step="0.01" placeholder="0" name="lower" data-mini="false" id="lower" value="">
+            </div>
+          
+            </div>
+            <input type="submit" id="btnSubmitRecord" value="Add Record">
+        </form>
+        <table id="tblRecords" class="ui-responsive table-stroke">
+        </table>
+    </div>
+  </div>
+
+
+  <!--Graph Page -->
+  <div data-role="page" id="pageGraph" class="test">
+    <div data-role="header">
+      <a href="#pageMenu" data-role="button" data-icon="bars"
+      data-iconpos="left" data-inline="true">Menu</a>
+      <h1>Analyze</h1>
+    </div>
+    <div class="panel panel-success">
+      <div class="panel-heading">
+        <h3 class="panel-title">TSH vs Date</h3>
+      </div>
+      <div class="panel-body">
+        <canvas id="GraphCanvas" width="500" height="500" style="border:1px solid #000000;">
+        </canvas>
+      </div>
+    </div>
+  </div>
+
+  <!--Advice Page -->
+  <div data-role="page" id="pageAdvice">
+    <div data-role="header">
+      <a href="#pageMenu" data-role="button" data-icon="bars" data-iconpos="left" data-inline="true">Menu</a>
+      <h1>Suggestions</h1>
+    </div>
+    <div data-role="content">
+      <canvas id="AdviceCanvas" width="550" height="550" style="border:1px solid #000000;">
+      </canvas>
+    </div>
+  </div>
+
+  <!--Sync Page-->
+  <div data-role="page" id="pageSync">
+    <div data-role="header">
+      <a href="#pageMenu" data-role="button" data-icon="bars" data-iconpos="left" data-inline="true">Menu</a>
+      <h1>Sync Account Information</h1>
+    </div>
+    <div data-role="content">
+      <div data-role="controlgroup">
+        <a id="btnUpload" data-role="button">Upload Records</a>
+        <a id="btnDownload" data-role="button">Download Records (Do Not OverwriteLocal Data)</a>
+      </div>
+    </div>
+  </div>
+
+<!--
+  <script src="scripts/RGraph.common.core.js"></script>
+  <script src="scripts/RGraph.common.effects.js"></script>
+  <script src="scripts/RGraph.line.js"></script>
+  <script src="scripts/RGraph.cornergauge.js"></script>
+  <script src="scripts/RGraph.hprogress.js"></script>
+
+  <script src="scripts/appRoute.js"></script>
+  <script src="scripts/userInfo.js"></script>
+  <script src="scripts/addRecord.js"></script>
+  <script src="scripts/createGraph.js"></script>
+  -->
+
+    <!--Custom Javascript/Jquery -->
+  <script src="scripts/RGraph.common.core.js"></script>
+  <script src="scripts/RGraph.common.effects.js"></script>
+  <script src="scripts/RGraph.line.js"></script>
+  <script src="scripts/RGraph.cornergauge.js"></script>
+  <script src="scripts/RGraph.hprogress.js"></script>
+
+  <script src="scripts/UserForm.js"></script>
+  <script src="scripts/Table.js"></script>
+  <script src="scripts/Navigation.js"></script>
+  <script src="scripts/Advice.js"></script>
+  <script src="scripts/Sync.js"></script>
+  <script src="scripts/GraphAnimate.js"></script>
+  <script src="scripts/pageLoader.js"></script>
+
+</body>
+
+</html>
