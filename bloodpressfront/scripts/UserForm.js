@@ -5,14 +5,12 @@ $("#btnUserClear").click(function () {
 });
 
 $("#btnUserUpdate").click(function () { //Event : submitting the form
-  alert("Button clicked. 1"); //FIXME remove
   saveUserForm();
   return true;
 });
 
 function checkUserForm() { //Check for empty fields in the form
   //for finding current date 
-  alert("Checking the form. 3"); //FIXME remove
   var d = new Date();
   var month = d.getMonth() + 1;
   var date = d.getDate();
@@ -78,7 +76,7 @@ function saveUserForm() {
 
             window.location.reload();
           }).fail(function (error) {
-            alert("Error from server: " + error.responseText); //FIXME edit
+            alert("Error from server: " + error.responseText); 
       });
     } 
     else {
@@ -90,7 +88,7 @@ function saveUserForm() {
           sessionStorage.password = user.password;
           sessionStorage.userID = user.userID;
       }).fail(function (error) {
-          alert("Error from server: " + error.responseText); //FIXME edit
+          alert("Error from server: " + error.responseText); 
       }).done(function () {
         $.mobile.changePage("#pageMenu");
         window.location.reload();
@@ -108,7 +106,6 @@ function clearUserForm() {
 }
 
 function showUserForm() { //Load the stored values in the form
-  alert("Running showUserForm..."); //FIXME remove
   if (sessionStorage.user != null) {
     $("#btnUserUpdate").val("Update").button("refresh");
 

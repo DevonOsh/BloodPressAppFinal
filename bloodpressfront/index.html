@@ -121,8 +121,6 @@
       <div data-role="controlgroup">
         <a href="#pageUserInfo" data-role="button">User Info</a>
         <a href="#pageNewRecordForm"" data-role="button">Records</a>
-        <a href="#pageGraph" data-role="button">Data Graph</a>
-        <a href="#pageAdvice" data-role="button">Recommendations</a>
         <a href="#pageSync" data-role="button">Sync</a>
       </div>
     </div>
@@ -160,6 +158,10 @@
     <div data-role="content">
         <form id="newRecordForm" action="">
           <div data-role="fieldcontain">
+            <div data-role="fieldcontain">
+              <label for="userID">User ID: </label>
+              <input type="date" name="userID" data-mini="false" id="userID" value="">
+            </div>
             <div data-role="fieldcontain">
               <label for="examDate">Date: </label>
               <input type="date" name="examDate" data-mini="false" id="examDate" value="">

@@ -33,10 +33,6 @@ $("#btnEnter").click(function () {
       if (data && data.userID == loginCredentials.userID) {
         sessionStorage.password = $("#passcode").val();
         sessionStorage.user = JSON.stringify(data);
-
-        if (!data.agreedToLegal) {
-          return $.mobile.changePage("#legalNotice");
-        }
         
         $.post(SERVER_URL + '/getRecords', loginCredentials, function (data) {
             sessionStorage.tbRecords = JSON.stringify(data);
@@ -58,15 +54,8 @@ $("#btnEnter").click(function () {
  */
 $("#noticeYes").click(function () {
   var user = JSON.parse(sessionStorage.user);
-  //user.agreedToLegal = 1; // True
   user.password = sessionStorage.password;
 
-  //$.post(SERVER_URL + '/updateUser', user, function (data) {
-  //    sessionStorage.user = JSON.stringify(user);
-  //    return $.mobile.changePage("#pageMenu");
-  //  }).fail(function (error) {
-  //    alert(error.responseText);
-  //});
   
   $.mobile.changePage("#pageMenu");
 });

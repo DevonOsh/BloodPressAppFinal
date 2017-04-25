@@ -66,9 +66,9 @@ function loadUserInformation() {
 
 function clearRecordForm() {
   $('#examDate').val("");
-  $('#txtTSH').val("");
-  $('#txtThyroglobulin').val("");
-  $('#txtSynthroidDose').val("");
+  $('#userID').val("");
+  $('#upper').val("");
+  $('#lower').val("");
   return true;
 }
 
@@ -177,7 +177,10 @@ function callDelete(index) {
 function addRecord() {
   if (checkRecordForm()) {
     alert("In adding record function"); //FIXME remove
+
+    var user = JSON.parse(sessionStorage.user);
     var record = {
+      "userID": user.userID;
       "Date": $('#examDate').val(),
       "upper": $('#upper').val(),
       "lower": $('#lower').val()
